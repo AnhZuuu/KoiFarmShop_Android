@@ -1,4 +1,4 @@
-package com.koifarmshop;
+package com.koifarmshop.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,18 +9,17 @@ import android.widget.ListView;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.koifarmshop.R;
+import com.koifarmshop.adapter.FishKindAdapter;
+import com.koifarmshop.model.FishKind;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
+    FishKindAdapter fishKindAdapter;
+    List<FishKind> fishKindArray;
 
 
     @Override
@@ -81,5 +82,12 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh = findViewById(R.id.listViewManHinhChinh);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
+
+        //khpowir tạo list trước
+        fishKindArray = new ArrayList<>();
+
+        //khởi tạo adapter
+        fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);
+        listViewManHinhChinh.setAdapter(fishKindAdapter);
     }
 }
