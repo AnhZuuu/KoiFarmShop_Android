@@ -14,7 +14,7 @@
         android:layout_height="35dp"/>
     <TextView
         android:id="@+id/item_tenca"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_marginLeft="10dp"
         android:text="CÁ KOI"
         android:textColor="@android:color/holo_red_light"

@@ -17,13 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.koifarmshop.R;
 import com.koifarmshop.adapter.FishKindAdapter;
+import com.koifarmshop.adapter.NewKoiAdapter;
 import com.koifarmshop.model.FishKind;
+import com.koifarmshop.model.NewKoi;
+import com.koifarmshop.model.NewKoiModel;
 import com.koifarmshop.retrofit.ApiBanCa;
 import com.koifarmshop.retrofit.RetrofitClient;
 import com.koifarmshop.utils.Utils;
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     List<FishKind> fishKindArray;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiBanCa apiBanCa;
+    List<NewKoi> newKoiArray;
+    NewKoiAdapter koiAdapter;
 
 
     @Override
@@ -63,11 +69,31 @@ public class MainActivity extends AppCompatActivity {
         if (isConnected(this)) {
             Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
             ActionViewFlipper();
+            getNewKoi();
             getFishKind();
         } else {
             Toast.makeText(getApplicationContext(), "NO INTERNET ACCESS", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void getNewKoi() {
+        compositeDisposable.add(apiBanCa.getNewKoi()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        newKoiModel -> {
+                            if(newKoiModel.isSuccess()) {
+                                newKoiArray = newKoiModel.getResult();
+                                koiAdapter = new NewKoiAdapter(getApplicationContext(), newKoiArray);
+                                recyclerViewManHinhChinh.setAdapter(koiAdapter);
+                            }
+                        },
+                        throwable -> {
+                            Toast.makeText(getApplicationContext(), "Không kết nối điuợc server  " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                )
+        );
     }
 
     private void getFishKind() {
@@ -76,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         fishKindModel -> {
-                            if(fishKindModel.isSuccess()) {
+                            if (fishKindModel.isSuccess()) {
                                 Toast.makeText(getApplicationContext(), fishKindModel.getResult().get(0).getTenCa(), Toast.LENGTH_LONG).show();
                             }
                         }
@@ -119,12 +145,16 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBarManHinhChinh);
         viewFlipper = findViewById(R.id.viewFlipper);
         recyclerViewManHinhChinh = findViewById(R.id.recycleView);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerViewManHinhChinh.setLayoutManager(layoutManager);
+        recyclerViewManHinhChinh.setHasFixedSize(true);
         listViewManHinhChinh = findViewById(R.id.listViewManHinhChinh);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
 
         //khpowir tạo list trước
         fishKindArray = new ArrayList<>();
+        newKoiArray = new ArrayList<>();
 
         //khởi tạo adapter
         fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);

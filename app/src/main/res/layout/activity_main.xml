@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="50dp"
     tools:context=".activity.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -41,8 +42,10 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="@android:color/holo_red_light"
                     android:text="Cá mới nhất"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleView"
                     android:layout_marginTop="10dp"

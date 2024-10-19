@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.koifarmshop.R;
 import com.koifarmshop.model.NewKoi;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class NewKoiAdapter extends RecyclerView.Adapter<NewKoiAdapter.MyViewHolder> {
@@ -36,7 +37,8 @@ public class NewKoiAdapter extends RecyclerView.Adapter<NewKoiAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NewKoi newKoi = array.get(position);
         holder.txtten.setText(newKoi.getTenCa());
-        holder.txtgia.setText(newKoi.getGia());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.txtgia.setText("Giá: " + decimalFormat.format(Double.parseDouble(newKoi.getGia())) + " vnd" );
         Glide.with(context).load(newKoi.getHinhAnh()).into(holder.imghinhanh);
     }
 
