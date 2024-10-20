@@ -36,6 +36,7 @@ public class NewKoiAdapter extends RecyclerView.Adapter<NewKoiAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NewKoi newKoi = array.get(position);
+
         holder.txtten.setText(newKoi.getTenCa());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtgia.setText("Giá: " + decimalFormat.format(Double.parseDouble(newKoi.getGia())) + " vnd" );

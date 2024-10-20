@@ -1,12 +1,15 @@
 package com.koifarmshop.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -67,14 +69,41 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (isConnected(this)) {
-            Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
+
             ActionViewFlipper();
             getNewKoi();
             getFishKind();
+            getEventClick();
         } else {
             Toast.makeText(getApplicationContext(), "NO INTERNET ACCESS", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void getEventClick() {
+        listViewManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(trangchu);
+                        break;
+
+                    case 1:
+                        Intent donsac = new Intent(getApplicationContext(), SingleActivity.class);
+                        donsac.putExtra("loai", 1);
+                        startActivity(donsac);
+                        break;
+                    case 2:
+                        Intent dasac = new Intent(getApplicationContext(), SingleActivity.class);
+                        dasac.putExtra("loai", 2);
+                        startActivity(dasac);
+                        break;
+                }
+
+            }
+        });
     }
 
     private void getNewKoi() {
@@ -83,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         newKoiModel -> {
-                            if(newKoiModel.isSuccess()) {
+                            if (newKoiModel.isSuccess()) {
                                 newKoiArray = newKoiModel.getResult();
                                 koiAdapter = new NewKoiAdapter(getApplicationContext(), newKoiArray);
                                 recyclerViewManHinhChinh.setAdapter(koiAdapter);
@@ -103,7 +132,12 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(
                         fishKindModel -> {
                             if (fishKindModel.isSuccess()) {
-                                Toast.makeText(getApplicationContext(), fishKindModel.getResult().get(0).getTenCa(), Toast.LENGTH_LONG).show();
+                                fishKindArray = fishKindModel.getResult();
+                                Log.d("ALOOOOOOOOO", fishKindArray.get(0).getTenCa());
+                                //khởi tạo adapter
+                                fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);
+                                listViewManHinhChinh.setAdapter(fishKindAdapter);
+                                //Toast.makeText(getApplicationContext(), fishKindModel.getResult().get(0).getTenCa(), Toast.LENGTH_LONG).show();
                             }
                         }
                 ));
@@ -133,10 +167,23 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                drawerLayout.openDrawer(GravityCompat.START);
+//                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+//                    drawerLayout.closeDrawer(GravityCompat.START);
+//                else
+//                    drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                else
+                    drawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }
@@ -156,9 +203,7 @@ public class MainActivity extends AppCompatActivity {
         fishKindArray = new ArrayList<>();
         newKoiArray = new ArrayList<>();
 
-        //khởi tạo adapter
-        fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);
-        listViewManHinhChinh.setAdapter(fishKindAdapter);
+
     }
 
     private boolean isConnected(Context context) {
@@ -170,5 +215,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }
