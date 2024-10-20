@@ -22,6 +22,12 @@ public interface ApiBanCa {
             @Field("page") int page,
             @Field("loai") int loai
     );
-
+    
+    @POST("login.php")
+    @FormUrlEncoded
+    Observable<UserModel> dangNhap(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 
 }
