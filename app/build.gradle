@@ -3,6 +3,10 @@ plugins {
 }
 
 android {
+    viewBinding {
+        enable = true;
+    }
+
     namespace 'com.koifarmshop'
     compileSdk 34
 

@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import com.koifarmshop.R;
+import com.koifarmshop.databinding.ActivityRegisterBinding;
 import com.koifarmshop.retrofit.ApiBanCa;
 import com.koifarmshop.retrofit.RetrofitClient;
 import com.koifarmshop.utils.Utils;
@@ -20,21 +19,21 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText email, password, repassword, phone, name;
-    AppCompatButton button;
+    private ActivityRegisterBinding binding;
     ApiBanCa apiBanCa;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initView();
         initControl();
     }
 
     private void initControl() {
-        button.setOnClickListener(new View.OnClickListener() {
+        binding.btndangky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 register();
@@ -43,11 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-        String str_email = email.getText().toString().trim();
-        String str_password = password.getText().toString().trim();
-        String str_repassword = repassword.getText().toString().trim();
-        String str_phone = phone.getText().toString().trim();
-        String str_name = name.getText().toString().trim();
+        String str_email = binding.email.getText().toString().trim();
+        String str_password = binding.password.getText().toString().trim();
+        String str_repassword = binding.repassword.getText().toString().trim();
+        String str_phone = binding.phone.getText().toString().trim();
+        String str_name = binding.name.getText().toString().trim();
 
         if (TextUtils.isEmpty(str_email)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập Email", Toast.LENGTH_SHORT).show();
@@ -91,13 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void initView() {
         apiBanCa = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanCa.class);
-
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        repassword = findViewById(R.id.repassword);
-        phone = findViewById(R.id.phone);
-        name = findViewById(R.id.name);
-        button = findViewById(R.id.btndangky);
     }
 
     @Override
