@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="Cá Đơn Sắc"
+        app:title="Danh sách Cá Koi"
         android:background="#B2B4C1"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"

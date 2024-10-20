@@ -63,9 +63,10 @@ public class SingleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             myViewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int pos, boolean isLongClick) {
-                    if(!isLongClick) {
+                    if (!isLongClick) {
                         //click
                         Intent intent = new Intent(context, DetailActivity.class);
+                        intent.putExtra("chitiet", koi);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }

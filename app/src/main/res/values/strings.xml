@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">KoiFarmShop</string>
+    <string name="ten_ca">Tên cá</string>
+    <string name="gia_25000">Gía: 25000đ</string>
+    <string name="them_vao_gio_hang">Thêm vào giỏ hàng</string>
+    <string name="mo_ta_chi_tiet_san_pham">Mô tả chi tiết sản phẩm</string>
 </resources>
