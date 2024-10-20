@@ -55,11 +55,9 @@ public class FishKindAdapter extends BaseAdapter {
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
-            viewHolder.textTenCa.setText(array.get(i).getTenCa());
-
-            Glide.with(context).load(array.get(i).getHinhAnh()).into(viewHolder.imgHinhAnh);
-
         }
+        viewHolder.textTenCa.setText(array.get(i).getTenCa());
+        Glide.with(context).load(array.get(i).getHinhAnh()).into(viewHolder.imgHinhAnh);
         return view;
     }
 }

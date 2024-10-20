@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -36,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (isConnected(this)) {
-            Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
+
             ActionViewFlipper();
             getNewKoi();
             getFishKind();
@@ -103,7 +103,12 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(
                         fishKindModel -> {
                             if (fishKindModel.isSuccess()) {
-                                Toast.makeText(getApplicationContext(), fishKindModel.getResult().get(0).getTenCa(), Toast.LENGTH_LONG).show();
+                                fishKindArray = fishKindModel.getResult();
+                                Log.d("ALOOOOOOOOO", fishKindArray.get(0).getTenCa());
+                                //khởi tạo adapter
+                                fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);
+                                listViewManHinhChinh.setAdapter(fishKindAdapter);
+                                //Toast.makeText(getApplicationContext(), fishKindModel.getResult().get(0).getTenCa(), Toast.LENGTH_LONG).show();
                             }
                         }
                 ));
@@ -133,10 +138,23 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                drawerLayout.openDrawer(GravityCompat.START);
+//                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+//                    drawerLayout.closeDrawer(GravityCompat.START);
+//                else
+//                    drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                else
+                    drawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }
@@ -156,9 +174,7 @@ public class MainActivity extends AppCompatActivity {
         fishKindArray = new ArrayList<>();
         newKoiArray = new ArrayList<>();
 
-        //khởi tạo adapter
-        fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);
-        listViewManHinhChinh.setAdapter(fishKindAdapter);
+
     }
 
     private boolean isConnected(Context context) {
@@ -170,5 +186,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }
