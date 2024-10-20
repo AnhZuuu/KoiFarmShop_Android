@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import com.koifarmshop.model.NewKoiModel;
 import com.koifarmshop.retrofit.ApiBanCa;
 import com.koifarmshop.retrofit.RetrofitClient;
 import com.koifarmshop.utils.Utils;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     ApiBanCa apiBanCa;
     List<NewKoi> newKoiArray;
     NewKoiAdapter koiAdapter;
+    NotificationBadge badge;
+    FrameLayout frameLayout;
 
 
     @Override
@@ -198,12 +202,32 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh = findViewById(R.id.listViewManHinhChinh);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
+        //giỏ hang
+        badge = findViewById(R.id.menu_sl);
+        frameLayout = findViewById(R.id.framegiohang);
 
         //khpowir tạo list trước
         fishKindArray = new ArrayList<>();
         newKoiArray = new ArrayList<>();
 
+//khoi tao mang gio hang
+        if (Utils.cartArray == null) {
+            Utils.cartArray = new ArrayList<>();
+        } else {
+            int totalItem = 0;
+            for (int i = 0; i < Utils.cartArray.size(); i++) {
+                totalItem = totalItem + Utils.cartArray.get(i).getSoluong();
+            }
+            badge.setText(String.valueOf(totalItem));
+        }
 
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cart = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(cart);
+            }
+        });
     }
 
     private boolean isConnected(Context context) {
@@ -215,6 +239,17 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    //resume để hiển thị số lượng giỏ hàng khi thêm trong detail page về homepage
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int totalItem = 0;
+        for (int i = 0; i < Utils.cartArray.size(); i++) {
+            totalItem = totalItem + Utils.cartArray.get(i).getSoluong();
+        }
+        badge.setText(String.valueOf(totalItem));
     }
 
     @Override
