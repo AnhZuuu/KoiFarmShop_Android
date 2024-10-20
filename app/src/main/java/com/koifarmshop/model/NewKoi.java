@@ -1,6 +1,8 @@
 package com.koifarmshop.model;
 
-public class NewKoi {
+import java.io.Serializable;
+
+public class NewKoi implements Serializable {
     int id;
     String tenCa;
     String gia;
