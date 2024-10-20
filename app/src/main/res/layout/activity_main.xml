@@ -12,18 +12,22 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBarManHinhChinh"
-                app:title="Trang chủ"
-                android:background="#ff00dfff"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                android:background="#ff00dfff"
+                android:paddingTop="10dp"
+                app:title="Trang chủ">
 
             </androidx.appcompat.widget.Toolbar>
+
             <ViewFlipper
                 android:id="@+id/viewFlipper"
                 android:layout_width="match_parent"
@@ -32,45 +36,50 @@
             </ViewFlipper>
 
             <LinearLayout
-                android:background="#5882d2"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="#5882d2"
+                android:orientation="vertical">
 
                 <TextView
-                    android:textSize="20sp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/holo_red_light"
-                    android:text="Cá mới nhất"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Cá mới nhất"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleView"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
-            <com.google.android.material.navigation.NavigationView
-                android:id="@+id/navigationView"
-                android:layout_gravity="start"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ListView
-                    android:id="@+id/listViewManHinhChinh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
 
-                </ListView>
-
-            </com.google.android.material.navigation.NavigationView>
-            
         </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_gravity="start">
+
+            <ListView
+                android:id="@+id/listViewManHinhChinh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="50dp">
+
+            </ListView>
+
+        </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
