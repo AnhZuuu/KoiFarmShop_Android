@@ -1,6 +1,7 @@
 package com.koifarmshop.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -71,10 +73,36 @@ public class MainActivity extends AppCompatActivity {
             ActionViewFlipper();
             getNewKoi();
             getFishKind();
+            getEventClick();
         } else {
             Toast.makeText(getApplicationContext(), "NO INTERNET ACCESS", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void getEventClick() {
+        listViewManHinhChinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(trangchu);
+                        break;
+
+                    case 1:
+                        Intent donsac = new Intent(getApplicationContext(), SingleActivity.class);
+                        donsac.putExtra("loai", 1);
+                        startActivity(donsac);
+                        break;
+                    case 2:
+                        Intent dasac = new Intent(getApplicationContext(), MultiActivity.class);
+                        startActivity(dasac);
+                        break;
+                }
+
+            }
+        });
     }
 
     private void getNewKoi() {
@@ -83,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         newKoiModel -> {
-                            if(newKoiModel.isSuccess()) {
+                            if (newKoiModel.isSuccess()) {
                                 newKoiArray = newKoiModel.getResult();
                                 koiAdapter = new NewKoiAdapter(getApplicationContext(), newKoiArray);
                                 recyclerViewManHinhChinh.setAdapter(koiAdapter);

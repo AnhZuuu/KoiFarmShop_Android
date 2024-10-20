@@ -47,7 +47,7 @@ public class FishKindAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if(view == null) {
             viewHolder = new ViewHolder();
-            LayoutInflater layoutInflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.item_cakoi, null);
 
             viewHolder.textTenCa = view.findViewById(R.id.item_tenca);
