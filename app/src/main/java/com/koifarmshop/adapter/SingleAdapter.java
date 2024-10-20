@@ -1,6 +1,7 @@
 package com.koifarmshop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.koifarmshop.Interface.ItemClickListener;
 import com.koifarmshop.R;
+import com.koifarmshop.activity.DetailActivity;
 import com.koifarmshop.model.NewKoi;
 
 import java.text.DecimalFormat;
@@ -53,9 +56,21 @@ public class SingleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             myViewHolder.gia.setText("Giá: " + decimalFormat.format(Double.parseDouble(koi.getGia())) + " vnd");
             myViewHolder.mota.setText(koi.getMota());
-            myViewHolder.id.setText(koi.getId() + "");
+
 
             Glide.with(context).load(koi.getHinhAnh()).into(myViewHolder.hinhanh);
+
+            myViewHolder.setItemClickListener(new ItemClickListener() {
+                @Override
+                public void onClick(View view, int pos, boolean isLongClick) {
+                    if(!isLongClick) {
+                        //click
+                        Intent intent = new Intent(context, DetailActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                }
+            });
         } else {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
@@ -99,17 +114,27 @@ public class SingleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tenCa, gia, mota, id;
         ImageView hinhanh;
+        private ItemClickListener itemClickListener;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tenCa = itemView.findViewById(R.id.itemsing_ten);
             gia = itemView.findViewById(R.id.itemsing_gia);
             mota = itemView.findViewById(R.id.itemsing_mota);
-            id = itemView.findViewById(R.id.itemsing_id);
             hinhanh = itemView.findViewById(R.id.itemsing_image);
+            itemView.setOnClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
         }
     }
 

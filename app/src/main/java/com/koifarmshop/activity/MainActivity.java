@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(donsac);
                         break;
                     case 2:
-                        Intent dasac = new Intent(getApplicationContext(), MultiActivity.class);
+                        Intent dasac = new Intent(getApplicationContext(), SingleActivity.class);
+                        dasac.putExtra("loai", 2);
                         startActivity(dasac);
                         break;
                 }
