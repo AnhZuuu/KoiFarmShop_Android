@@ -61,7 +61,7 @@ private ActivityPurchaseBinding binding;
                 String str_diachi = binding.editDiaChi.getText().toString().trim();
                 if (TextUtils.isEmpty(str_diachi)) {
                     Toast.makeText(getApplicationContext(), "Bạn chưa nhập địa chỉ", Toast.LENGTH_SHORT).show();
-                } else {
+                } else { 
                     //post data
                     Log.d("test", new Gson().toJson(Utils.cartArray));
                     Intent intent = new Intent(getApplicationContext(), QRActivity.class);
