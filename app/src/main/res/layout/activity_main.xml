@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="50dp"
+    android:layout_marginBottom="@dimen/dimen_50"
     tools:context=".activity.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -22,56 +22,57 @@
                 android:id="@+id/toolBarManHinhChinh"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#ff00dfff"
-                android:paddingTop="10dp"
-                app:title="Trang chủ">
+                android:background="@color/toolbar_color"
+                android:paddingTop="@dimen/dimen_10"
+                app:title="@string/trang_chu">
                 <FrameLayout
                     android:id="@+id/framegiohang"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="@dimen/dimen_10"
                     android:layout_gravity="right"
-                    android:layout_width="50dp"
+                    android:layout_width="@dimen/dimen_50"
                     android:layout_height="?attr/actionBarSize">
                     <com.nex3z.notificationbadge.NotificationBadge
                         android:id="@+id/menu_sl"
                         android:layout_gravity="top|right"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"/>
+                        android:layout_width="@dimen/dimen_28"
+                        android:layout_height="@dimen/dimen_28"/>
                     <ImageView
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="@dimen/dimen_15"
                         android:src="@drawable/ic_cart"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"/>
+                        android:layout_width="@dimen/dimen_30"
+                        android:layout_height="@dimen/dimen_30"/>
                 </FrameLayout>
             </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
                 android:id="@+id/viewFlipper"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="@dimen/dimen_200">
 
             </ViewFlipper>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#5882d2"
+                android:background="@color/gray_light"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Cá mới nhất"
+                    android:layout_marginLeft="@dimen/dimen_10"
+                    android:text="@string/mat_hang_ca_koi_moi"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@android:color/holo_red_light"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_20"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:layout_marginTop="@dimen/dimen_10">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
@@ -91,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="@dimen/dimen_50">
 
             </ListView>
 
