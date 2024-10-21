@@ -1,5 +1,6 @@
 package com.koifarmshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -63,6 +64,9 @@ private ActivityPurchaseBinding binding;
                 } else {
                     //post data
                     Log.d("test", new Gson().toJson(Utils.cartArray));
+                    Intent intent = new Intent(getApplicationContext(), QRActivity.class);
+                    intent.putExtra("tongtien", tongtien);
+                    startActivity(intent);
                 }
             }
         });
