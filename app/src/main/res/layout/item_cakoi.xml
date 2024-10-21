@@ -2,26 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
+    android:layout_marginTop="@dimen/dimen_20"
+    android:layout_marginBottom="@dimen/dimen_20"
     android:orientation="horizontal"
     android:layout_gravity="start">
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="@dimen/dimen_50"
+        android:layout_height="@dimen/dimen_50"
+        android:layout_marginLeft="@dimen/dimen_10"
         android:src="@drawable/ic_media" />
 
     <TextView
         android:id="@+id/item_tenca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/dimen_10"
         android:gravity="center"
-        android:text="CÁ KOI"
+        android:text="@string/ca_koi"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="20dp" />
+        android:textSize="@dimen/text_size_20" />
 
 </LinearLayout>
