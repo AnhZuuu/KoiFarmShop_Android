@@ -1,5 +1,6 @@
 package com.koifarmshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.activity.EdgeToEdge;
@@ -22,6 +23,7 @@ import java.text.DecimalFormat;
 public class CartActivity extends AppCompatActivity {
     private ActivityCartBinding binding;
     CartAdapter adapter;
+    long tongTienGioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void tinhTongTien() {
-        long tongTienGioHang = 0;
+        tongTienGioHang = 0;
         for (int i = 0; i < Utils.cartArray.size(); i++) {
             tongTienGioHang = tongTienGioHang + (Utils.cartArray.get(i).getGiaCa() * Utils.cartArray.get(i).getSoluong());
         }
@@ -63,6 +65,14 @@ public class CartActivity extends AppCompatActivity {
             adapter = new CartAdapter(getApplicationContext(), Utils.cartArray);
             binding.recycleviewgiohang.setAdapter(adapter);
         }
+        binding.btnmuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PurchaseActivity.class);
+                intent.putExtra("tongtien", tongTienGioHang);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

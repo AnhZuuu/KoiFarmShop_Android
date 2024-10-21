@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/toolbar_color"
-                android:paddingTop="@dimen/dimen_10"
+                android:paddingTop="10dp"
+
                 app:title="@string/trang_chu">
                 <FrameLayout
                     android:id="@+id/framegiohang"
@@ -72,7 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/dimen_5"
-                    android:layout_marginTop="@dimen/dimen_10">
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_marginBottom="@dimen/dimen_50">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
