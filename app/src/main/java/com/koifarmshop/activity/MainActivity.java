@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                         Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(trangchu);
                         break;
-
                     case 1:
                         Intent donsac = new Intent(getApplicationContext(), SingleActivity.class);
                         donsac.putExtra("loai", 1);
@@ -88,6 +87,14 @@ public class MainActivity extends AppCompatActivity {
                         Intent dasac = new Intent(getApplicationContext(), SingleActivity.class);
                         dasac.putExtra("loai", 2);
                         startActivity(dasac);
+                        break;
+                    case 3:
+                        Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
+                        startActivity(chat);
+                        break;
+                    case 4:
+                        Intent chatchat = new Intent(getApplicationContext(), ChatActivity.class);
+                        startActivity(chatchat);
                         break;
                 }
 
