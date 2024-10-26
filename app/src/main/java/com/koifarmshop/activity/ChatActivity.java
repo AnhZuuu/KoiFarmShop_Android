@@ -27,7 +27,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private TextInputEditText queryEditText;
 
-    private ImageView sendQuery;
+    private ImageView sendQuery, logo;
 
     FloatingActionButton btnShowDialog;
 
@@ -113,9 +113,11 @@ public class ChatActivity extends AppCompatActivity {
 
         TextView name = view.findViewById(R.id.name);
         TextView message = view.findViewById(R.id.agentMessage);
+        ImageView logo = view.findViewById(R.id.logo);
 
         name.setText(userName);
         message.setText(query);
+        logo.setImageDrawable(image);
 
         chatResponse.addView(view);
 
