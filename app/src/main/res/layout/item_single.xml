@@ -26,31 +26,36 @@
             android:layout_weight="7"
             android:layout_width="0dp"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/itemsing_ten"
+                    android:layout_width="@dimen/dimen_129"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/ten_Ca"
+                    android:textSize="@dimen/text_size_20"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/itemsing_ten"
-                android:text="@string/ten_Ca"
-                android:textSize="@dimen/text_size_20"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/itemsing_gia"
+                    android:layout_width="@dimen/dimen_129"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/gia_250"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="@dimen/text_size_16" />
 
-            <TextView
-                android:id="@+id/itemsing_gia"
-                android:text="@string/gia_250"
-                android:textSize="@dimen/text_size_16"
-                android:gravity="end"
-                android:textColor="@android:color/holo_red_light"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/itemsing_mota"
                 android:text="@string/mo_ta"
                 android:textSize="@dimen/text_size_14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
 
         </LinearLayout>
 

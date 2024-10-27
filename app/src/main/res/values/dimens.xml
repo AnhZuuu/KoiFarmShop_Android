@@ -26,5 +26,6 @@
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_25">25sp</dimen>
+    <dimen name="dimen_129">129dp</dimen>
 
 </resources>

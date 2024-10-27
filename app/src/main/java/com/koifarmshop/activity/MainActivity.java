@@ -211,6 +211,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(cart);
             }
         });
+
+        binding.imgsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean isConnected(Context context) {

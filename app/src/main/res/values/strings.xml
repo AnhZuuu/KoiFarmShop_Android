@@ -29,6 +29,8 @@
     <string name="sl_1">1</string>
     <string name="nhieu_mau">Nhiều màu</string>
     <string name="gia_500">Giá: 500k vnd</string>
-    <string name="gia_250">Giá: 250 000d</string>
+    <string name="gia_250">Giá: 250 000vnd</string>
     <string name="mo_ta">Mô tả:</string>
+    <string name="nhap_ca_can_tim">Nhập tên cá cần tìm</string>
+    <string name="koi_farm_shop">Koi Farm Shop</string>
 </resources>

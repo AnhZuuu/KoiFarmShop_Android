@@ -39,4 +39,10 @@ public interface ApiBanCa {
             @Field("name") String name,
             @Field("phone") String phone
     );
+
+    @POST("search.php")
+    @FormUrlEncoded
+    Observable<NewKoiModel> search(
+            @Field("search") String search
+    );
 }
