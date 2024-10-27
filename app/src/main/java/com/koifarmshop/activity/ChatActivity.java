@@ -78,14 +78,14 @@ public class ChatActivity extends AppCompatActivity {
 
                 queryEditText.setText("");
 
-                chatBody("You", query, getDrawable(R.drawable.ic_launcher_background));
+                chatBody("You", query, getDrawable(R.drawable.ic_user));
 
                 GeminiResp.getResponse(chatModel, query, new ResponseCallback() {
                     @Override
                     public void onResponse(String response) {
 
                         progressBar.setVisibility(View.GONE);
-                        chatBody("AI", response, getDrawable(R.drawable.ic_launcher_foreground));
+                        chatBody("AI", response, getDrawable(R.drawable.ic_ai));
                     }
 
                     @Override
