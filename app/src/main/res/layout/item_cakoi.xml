@@ -18,10 +18,11 @@
         android:id="@+id/item_tenca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10"
         android:layout_marginLeft="@dimen/dimen_10"
         android:gravity="center"
         android:text="@string/ca_koi"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_20" />
 
 </LinearLayout>

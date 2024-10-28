@@ -106,7 +106,8 @@
             android:layout_width="@dimen/dimen_250"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
-            android:layout_gravity="start">
+            android:layout_gravity="start"
+            android:background="#e8ffff">
 
             <TextView
                 android:layout_gravity="center_horizontal"

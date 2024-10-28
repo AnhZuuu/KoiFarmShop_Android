@@ -5,6 +5,11 @@ public class FishKind {
     String tenCa;
     String hinhAnh;
 
+    public FishKind(String tenCa, String hinhAnh) {
+        this.tenCa = tenCa;
+        this.hinhAnh = hinhAnh;
+    }
+
     public int getId() {
         return id;
     }
