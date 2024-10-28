@@ -33,6 +33,7 @@ import com.koifarmshop.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -92,9 +93,16 @@ public class MainActivity extends AppCompatActivity {
                         Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
                         startActivity(chat);
                         break;
+//                    case 4:
+//                        Intent chatchat = new Intent(getApplicationContext(), ChatActivity.class);
+//                        startActivity(chatchat);
+//                        break;
                     case 4:
-                        Intent chatchat = new Intent(getApplicationContext(), ChatActivity.class);
-                        startActivity(chatchat);
+                        //xoa key user
+                        Paper.book().delete("user");
+                        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(login);
+                        finish();
                         break;
                 }
 
@@ -130,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
                             if (fishKindModel.isSuccess()) {
                                 fishKindArray = fishKindModel.getResult();
                                 Log.d("ALOOOOOOOOO", fishKindArray.get(0).getTenCa());
+
+                                fishKindArray.add(new FishKind("Đăng xuất", "https://static.vecteezy.com/system/resources/previews/004/274/239/large_2x/output-icon-asset-data-upload-or-exit-icon-glyph-symbol-in-your-web-site-design-logo-app-ui-webinar-video-chat-ect-vector.jpg"));
+
                                 //khởi tạo adapter
                                 fishKindAdapter = new FishKindAdapter(getApplicationContext(), fishKindArray);
                                 binding.listViewManHinhChinh.setAdapter(fishKindAdapter);
